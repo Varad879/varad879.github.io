@@ -2142,14 +2142,14 @@
         canvas.height = window.innerHeight;
 
         const particles = [];
-        // Detect mobile device and adjust particle count
+        // Detect mobile device and HEAVILY optimize for performance
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-        const particleCount = isMobile ? 80 : 150; // Reduced count on mobile
+        const particleCount = isMobile ? 30 : 150; // Drastically reduced from 80 to 30 on mobile
         
         let mouse = {
             x: null,
             y: null,
-            radius: isMobile ? 120 : 150 // Smaller radius on mobile
+            radius: isMobile ? 80 : 150 // Smaller interaction radius on mobile
         };
 
         // Track mouse position for desktop
@@ -2158,11 +2158,17 @@
             mouse.y = e.y;
         });
 
-        // Track touch position for mobile
+        // Track touch position for mobile with heavy throttling
+        let lastTouchTime = 0;
         window.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0) {
-                mouse.x = e.touches[0].clientX;
-                mouse.y = e.touches[0].clientY;
+            const now = Date.now();
+            // Throttle touch events to every 32ms (~30fps) for better performance
+            if (now - lastTouchTime > 32) {
+                if (e.touches.length > 0) {
+                    mouse.x = e.touches[0].clientX;
+                    mouse.y = e.touches[0].clientY;
+                }
+                lastTouchTime = now;
             }
         }, { passive: true });
 
@@ -2178,7 +2184,7 @@
             setTimeout(() => {
                 mouse.x = null;
                 mouse.y = null;
-            }, 200);
+            }, 100);
         });
 
         // Clear mouse position when not hovering (desktop only)
@@ -2191,13 +2197,13 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * (isMobile ? 2.5 : 3) + 1; // Slightly larger particles
+                this.size = Math.random() * (isMobile ? 2 : 3) + 1;
                 this.baseX = this.x;
                 this.baseY = this.y;
                 this.speedX = Math.random() * 0.5 - 0.25;
                 this.speedY = Math.random() * 0.5 - 0.25;
-                this.opacity = Math.random() * 0.6 + 0.3; // More visible
-                this.density = Math.random() * (isMobile ? 50 : 40) + 5;
+                this.opacity = Math.random() * 0.6 + 0.3;
+                this.density = Math.random() * (isMobile ? 25 : 40) + 5;
             }
 
             update() {
@@ -2216,15 +2222,16 @@
                     const dx = mouse.x - this.baseX;
                     const dy = mouse.y - this.baseY;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    const forceDirectionX = dx / distance;
-                    const forceDirectionY = dy / distance;
-                    const maxDistance = mouse.radius;
-                    const force = (maxDistance - distance) / maxDistance;
 
                     if (distance < mouse.radius) {
-                        // Repel particles from cursor/touch (stronger on mobile)
-                        const directionX = forceDirectionX * force * this.density * (isMobile ? 1.3 : 1);
-                        const directionY = forceDirectionY * force * this.density * (isMobile ? 1.3 : 1);
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        
+                        // Simplified calculation for mobile
+                        const multiplier = isMobile ? 1.2 : 1;
+                        const directionX = forceDirectionX * force * this.density * multiplier;
+                        const directionY = forceDirectionY * force * this.density * multiplier;
                         this.x = this.baseX - directionX;
                         this.y = this.baseY - directionY;
                     } else {
@@ -2243,11 +2250,13 @@
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Add glow effect for particles (stronger on mobile)
-                ctx.shadowBlur = isMobile ? 12 : 10;
-                ctx.shadowColor = 'rgba(0, 255, 136, 0.5)';
-                ctx.fill();
-                ctx.shadowBlur = 0;
+                // Simplified glow on mobile (no glow to save performance)
+                if (!isMobile) {
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = 'rgba(0, 255, 136, 0.5)';
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
             }
         }
 
@@ -2256,7 +2265,18 @@
             particles.push(new Particle());
         }
 
-        function animateParticles() {
+        // Frame rate limiting for mobile
+        let lastFrameTime = 0;
+        const targetFrameTime = isMobile ? 33 : 16; // 30fps on mobile, 60fps on desktop
+
+        function animateParticles(currentTime) {
+            // Limit frame rate on mobile
+            if (currentTime - lastFrameTime < targetFrameTime) {
+                requestAnimationFrame(animateParticles);
+                return;
+            }
+            lastFrameTime = currentTime;
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             particles.forEach(particle => {
@@ -2264,67 +2284,78 @@
                 particle.draw();
             });
 
-            // Draw connections between nearby particles
-            const connectionDistance = isMobile ? 100 : 120;
+            // Draw connections between nearby particles (HEAVILY OPTIMIZED)
+            const connectionDistance = isMobile ? 80 : 120; // Reduced distance on mobile
+            const maxConnections = isMobile ? 2 : 3; // Limit connections per particle on mobile
+            
             particles.forEach((particleA, indexA) => {
-                particles.slice(indexA + 1).forEach(particleB => {
+                let connectionCount = 0;
+                
+                // Only check subset of particles on mobile for performance
+                const checkParticles = isMobile ? particles.slice(indexA + 1, indexA + 6) : particles.slice(indexA + 1);
+                
+                for (let i = 0; i < checkParticles.length && connectionCount < maxConnections; i++) {
+                    const particleB = checkParticles[i];
                     const dx = particleA.x - particleB.x;
                     const dy = particleA.y - particleB.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < connectionDistance) {
-                        const opacity = (isMobile ? 0.25 : 0.2) * (1 - distance / connectionDistance);
+                        const opacity = (isMobile ? 0.3 : 0.2) * (1 - distance / connectionDistance);
                         ctx.strokeStyle = `rgba(0, 255, 136, ${opacity})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particleA.x, particleA.y);
                         ctx.lineTo(particleB.x, particleB.y);
                         ctx.stroke();
+                        connectionCount++;
                     }
-                });
+                }
             });
 
             // Draw connections from mouse/touch to nearby particles
             if (mouse.x != null && mouse.y != null) {
-                const mouseConnectionDistance = isMobile ? 130 : 150;
-                particles.forEach(particle => {
+                const mouseConnectionDistance = isMobile ? 100 : 150;
+                let mouseConnections = 0;
+                const maxMouseConnections = isMobile ? 5 : 10; // Limit mouse connections on mobile
+                
+                for (let i = 0; i < particles.length && mouseConnections < maxMouseConnections; i++) {
+                    const particle = particles[i];
                     const dx = mouse.x - particle.x;
                     const dy = mouse.y - particle.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < mouseConnectionDistance) {
-                        const opacity = (isMobile ? 0.4 : 0.3) * (1 - distance / mouseConnectionDistance);
+                        const opacity = (isMobile ? 0.5 : 0.3) * (1 - distance / mouseConnectionDistance);
                         ctx.strokeStyle = `rgba(0, 217, 255, ${opacity})`;
                         ctx.lineWidth = isMobile ? 2 : 1.5;
                         ctx.beginPath();
                         ctx.moveTo(particle.x, particle.y);
                         ctx.lineTo(mouse.x, mouse.y);
                         ctx.stroke();
+                        mouseConnections++;
                     }
-                });
+                }
 
-                // Draw glow at touch/cursor point on mobile
+                // Draw glow at touch point on mobile (simplified)
                 if (isMobile) {
                     ctx.beginPath();
-                    ctx.arc(mouse.x, mouse.y, 8, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(0, 217, 255, 0.3)';
-                    ctx.shadowBlur = 20;
-                    ctx.shadowColor = 'rgba(0, 217, 255, 0.8)';
+                    ctx.arc(mouse.x, mouse.y, 6, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(0, 217, 255, 0.4)';
                     ctx.fill();
-                    ctx.shadowBlur = 0;
                 }
             }
 
             requestAnimationFrame(animateParticles);
         }
-        animateParticles();
+        animateParticles(0);
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             // Reinitialize particles on resize
             particles.length = 0;
-            const newCount = window.innerWidth < 768 ? 80 : 150;
+            const newCount = window.innerWidth < 768 ? 30 : 150;
             for (let i = 0; i < newCount; i++) {
                 particles.push(new Particle());
             }
