@@ -19,11 +19,21 @@
 
         :root {
             --bg-dark: #0a0a0a;
+            --bg-light: #f5f5f7;
             --text-primary: #00ff88;
+            --text-primary-light: #00b359;
             --text-secondary: #ffffff;
+            --text-secondary-light: #1a1a1a;
             --text-muted: #888888;
+            --text-muted-light: #666666;
             --accent-cyan: #00d9ff;
+            --accent-cyan-light: #0099cc;
             --accent-purple: #b026ff;
+            --accent-purple-light: #7d1ab8;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-bg-light: rgba(26, 26, 26, 0.03);
+            --border-color: rgba(0, 255, 136, 0.2);
+            --border-color-light: rgba(0, 179, 89, 0.4);
         }
 
         body {
@@ -32,6 +42,161 @@
             font-family: 'Space Mono', monospace;
             overflow-x: hidden;
             cursor: none;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-mode {
+            background: var(--bg-light);
+            color: var(--text-secondary-light);
+        }
+
+        body.light-mode .grid-background {
+            opacity: 0.3;
+            background-image: 
+                linear-gradient(rgba(0, 179, 89, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 179, 89, 0.15) 1px, transparent 1px);
+        }
+
+        body.light-mode .scanline {
+            opacity: 0.15;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 179, 89, 0.1) 50%,
+                transparent 50%
+            );
+        }
+
+        body.light-mode .floating-shapes svg {
+            stroke: var(--text-primary-light);
+        }
+
+        body.light-mode #particles-canvas {
+            opacity: 0.5;
+        }
+
+        body.light-mode nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 179, 89, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode .logo {
+            color: var(--text-primary-light);
+        }
+
+        body.light-mode .nav-links a.active {
+            color: var(--text-primary-light);
+        }
+
+        body.light-mode .theme-toggle {
+            border-color: var(--border-color-light);
+        }
+
+        body.light-mode .theme-toggle:hover {
+            border-color: var(--text-primary-light);
+            background: rgba(0, 179, 89, 0.1);
+        }
+
+        body.light-mode .theme-toggle svg {
+            color: var(--text-primary-light);
+        }
+
+        body.light-mode .hero-title,
+        body.light-mode .timeline-year,
+        body.light-mode .section-title {
+            color: var(--text-secondary-light);
+        }
+
+        body.light-mode .hero-subtitle {
+            color: #333333;
+        }
+
+        body.light-mode .stat-number {
+            color: var(--text-primary-light);
+        }
+
+        body.light-mode .timeline-line {
+            background: linear-gradient(90deg, transparent, var(--text-primary-light), transparent);
+        }
+
+        body.light-mode .timeline-dot {
+            background: var(--text-primary-light);
+            box-shadow: 0 0 20px var(--text-primary-light);
+        }
+
+        body.light-mode .timeline-dot::before {
+            border-color: var(--text-primary-light);
+        }
+
+        body.light-mode .tech-card,
+        body.light-mode .project-card,
+        body.light-mode .cert-card,
+        body.light-mode .contact-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 179, 89, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode .tech-card:hover,
+        body.light-mode .project-card:hover,
+        body.light-mode .cert-card:hover,
+        body.light-mode .contact-card:hover {
+            border-color: var(--text-primary-light);
+            box-shadow: 0 8px 30px rgba(0, 179, 89, 0.15);
+        }
+
+        body.light-mode .tech-name,
+        body.light-mode .project-title,
+        body.light-mode .cert-title {
+            color: var(--text-secondary-light);
+        }
+
+        body.light-mode .badge,
+        body.light-mode .tech-tag {
+            background: rgba(0, 179, 89, 0.1);
+            color: var(--text-primary-light);
+            border: 1px solid rgba(0, 179, 89, 0.3);
+        }
+
+        body.light-mode .skill-bar-fill {
+            background: linear-gradient(90deg, var(--text-primary-light), var(--accent-cyan-light));
+        }
+
+        body.light-mode .timeline-item::before {
+            background: var(--text-primary-light);
+            box-shadow: 0 0 0 4px rgba(0, 179, 89, 0.2);
+        }
+
+        body.light-mode .workflow-step {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(0, 179, 89, 0.3);
+        }
+
+        body.light-mode .workflow-step:hover {
+            border-color: var(--text-primary-light);
+            box-shadow: 0 10px 40px rgba(0, 179, 89, 0.15);
+        }
+
+        body.light-mode .step-number {
+            background: linear-gradient(135deg, var(--text-primary-light), var(--accent-cyan-light));
+        }
+
+        body.light-mode .cert-link,
+        body.light-mode .project-thesis-link {
+            color: var(--text-primary-light);
+        }
+
+        body.light-mode .contact-icon {
+            background: linear-gradient(135deg, var(--text-primary-light), var(--accent-cyan-light));
+        }
+
+        body.light-mode .avatar {
+            background: linear-gradient(135deg, var(--text-primary-light), var(--accent-cyan-light));
+            box-shadow: 0 0 30px rgba(0, 179, 89, 0.3);
+        }
+
+        body.light-mode footer {
+            border-top: 1px solid rgba(0, 179, 89, 0.2);
         }
 
         /* Loading Screen */
@@ -101,6 +266,11 @@
             transform: translate(-50%, -50%);
         }
 
+        body.light-mode .custom-cursor {
+            border-color: var(--text-primary-light);
+            mix-blend-mode: normal;
+        }
+
         .cursor-follower {
             width: 40px;
             height: 40px;
@@ -112,6 +282,11 @@
             transition: transform 0.15s ease;
             opacity: 0.5;
             transform: translate(-50%, -50%);
+        }
+
+        body.light-mode .cursor-follower {
+            border-color: var(--text-primary-light);
+            opacity: 0.6;
         }
 
         /* Particle Canvas */
@@ -169,6 +344,11 @@
         .shape:nth-child(3) { left: 40%; top: 60%; animation-delay: 4s; }
         .shape:nth-child(4) { left: 70%; top: 80%; animation-delay: 6s; }
         .shape:nth-child(5) { left: 20%; top: 70%; animation-delay: 8s; }
+        .shape:nth-child(6) { left: 60%; top: 15%; animation-delay: 1s; }
+        .shape:nth-child(7) { left: 15%; top: 45%; animation-delay: 3s; }
+        .shape:nth-child(8) { left: 85%; top: 65%; animation-delay: 5s; }
+        .shape:nth-child(9) { left: 50%; top: 85%; animation-delay: 7s; }
+        .shape:nth-child(10) { left: 30%; top: 30%; animation-delay: 9s; }
 
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -290,6 +470,65 @@
         .nav-links a:hover::before,
         .nav-links a:hover::after {
             opacity: 1;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border-color);
+            background: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--text-primary);
+            transform: rotate(180deg);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            color: var(--text-primary);
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: rotate(-90deg);
+        }
+
+        .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        body.light-mode .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        body.light-mode .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+
+        body.light-mode nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
         }
 
         /* Hero Section */
@@ -482,6 +721,156 @@
 
         @keyframes expandLine {
             to { width: 100%; }
+        }
+
+        /* Career Timeline Section */
+        .career-timeline {
+            margin: 5rem 0;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-title-main {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .timeline-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
+            transform: translateY(-50%);
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--text-primary);
+            animation: timelineProgress 2s ease-out forwards;
+            transform-origin: left;
+        }
+
+        @keyframes timelineProgress {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        .timeline-events {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-event {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .timeline-event:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-event:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-event:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-event:nth-child(4) { animation-delay: 0.8s; }
+        .timeline-event:nth-child(5) { animation-delay: 1s; }
+
+        .timeline-year {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            position: relative;
+            margin-bottom: 3rem;
+            box-shadow: 0 0 20px var(--text-primary);
+            animation: pulse 2s infinite;
+            z-index: 3;
+        }
+
+        .timeline-dot::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px dotted var(--text-primary);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+        }
+
+        .timeline-content {
+            text-align: center;
+            max-width: 200px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        .timeline-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .timeline-company-logo {
+            margin-top: 1rem;
+            height: 40px;
+            opacity: 0.8;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-event:hover .timeline-company-logo {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
         }
 
         /* Tech Stack Section */
@@ -1013,8 +1402,21 @@
         .cert-issuer {
             font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             letter-spacing: 0.05em;
+        }
+
+        .cert-provider-logo {
+            height: 30px;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover .cert-provider-logo {
+            opacity: 1;
+            filter: grayscale(0%);
         }
 
         .cert-link {
@@ -1288,11 +1690,68 @@
                 gap: 1rem;
             }
 
+            .nav-actions {
+                width: 100%;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .theme-toggle {
+                width: 35px;
+                height: 35px;
+            }
+
             .nav-links {
                 gap: 1rem;
                 flex-wrap: wrap;
                 justify-content: center;
                 font-size: 0.85rem;
+            }
+
+            .timeline-container {
+                padding: 2rem 1rem;
+            }
+
+            .timeline-events {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .timeline-line {
+                left: 50%;
+                top: 0;
+                bottom: 0;
+                width: 2px;
+                height: auto;
+                transform: translateX(-50%);
+                background: linear-gradient(180deg, transparent, var(--text-primary), transparent);
+            }
+
+            .timeline-event {
+                flex-direction: row;
+                gap: 1.5rem;
+                align-items: center;
+            }
+
+            .timeline-year {
+                font-size: 1.3rem;
+                margin-bottom: 0;
+                min-width: 80px;
+                text-align: right;
+            }
+
+            .timeline-dot {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .timeline-content {
+                text-align: left;
+                max-width: none;
+            }
+
+            .timeline-company-logo {
+                height: 30px;
             }
 
             .hero-title {
@@ -1554,6 +2013,21 @@
         <svg class="shape" width="110" height="110" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="30" fill="none" stroke="#00d9ff" stroke-width="1" opacity="0.3"/>
         </svg>
+        <svg class="shape" width="95" height="95" viewBox="0 0 100 100">
+            <polygon points="50,15 85,85 15,85" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.2"/>
+        </svg>
+        <svg class="shape" width="105" height="105" viewBox="0 0 100 100">
+            <rect x="15" y="15" width="70" height="70" fill="none" stroke="#00d9ff" stroke-width="1" opacity="0.25"/>
+        </svg>
+        <svg class="shape" width="85" height="85" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#b026ff" stroke-width="1" opacity="0.3"/>
+        </svg>
+        <svg class="shape" width="115" height="115" viewBox="0 0 100 100">
+            <polygon points="50,20 80,80 20,80" fill="none" stroke="#00d9ff" stroke-width="1" opacity="0.2"/>
+        </svg>
+        <svg class="shape" width="100" height="100" viewBox="0 0 100 100">
+            <rect x="25" y="25" width="50" height="50" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.25" transform="rotate(30 50 50)"/>
+        </svg>
     </div>
 
     <div class="grid-background"></div>
@@ -1563,6 +2037,7 @@
     <nav>
         <a href="#" class="logo">VS</a>
         <ul class="nav-links">
+            <li><a href="#timeline" data-section="timeline">Timeline</a></li>
             <li><a href="#tools" data-section="tools">Tools</a></li>
             <li><a href="#experience" data-section="experience">Experience</a></li>
             <li><a href="#projects" data-section="projects">Projects</a></li>
@@ -1571,6 +2046,24 @@
             <li><a href="#certifications" data-section="certifications">Certifications</a></li>
             <li><a href="#contact" data-section="contact">Contact</a></li>
         </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
     </nav>
 
     <div class="container">
@@ -1598,6 +2091,63 @@
                 <div class="stat">
                     <div class="stat-number" data-target="10">0</div>
                     <div class="stat-label">+ Certifications</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Timeline Section -->
+        <section id="timeline" class="section career-timeline">
+            <div class="timeline-header">
+                <h2 class="timeline-title-main">Personal Profile & Career Journey</h2>
+                <p class="timeline-subtitle">My professional evolution from student to PLM specialist</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <div class="timeline-year">2016</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-label">SSC</div>
+                            <div class="timeline-description">Secondary Education</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-year">2018</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-label">HSC</div>
+                            <div class="timeline-description">Higher Secondary</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-year">2022</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-label">BE - ENTC</div>
+                            <div class="timeline-description">JSPM ICOER<br>CGPA: 8.14</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-label">Joined TCS</div>
+                            <div class="timeline-description">Systems Engineer<br>Data Migration</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-event">
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-label">Joined Capgemini</div>
+                            <div class="timeline-description">Associate Consultant<br>PLM Specialist</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1890,6 +2440,7 @@
                     <div class="cert-icon">🎓</div>
                     <h4 class="cert-title">Windchill: Fundamentals Overview</h4>
                     <p class="cert-issuer">PTC University</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/PTC_%28software_company%29_logo.svg/320px-PTC_%28software_company%29_logo.svg.png" alt="PTC Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1eZsrCZz_EmBtFV9AOdzfS7rbZr1jgfpt/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1904,6 +2455,7 @@
                     <div class="cert-icon">🎓</div>
                     <h4 class="cert-title">Windchill: Fundamentals of Change Management</h4>
                     <p class="cert-issuer">PTC University</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/PTC_%28software_company%29_logo.svg/320px-PTC_%28software_company%29_logo.svg.png" alt="PTC Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1nU_CJDaFXzOrySYlWf7HpSBcwNglNmD9/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1918,6 +2470,7 @@
                     <div class="cert-icon">🎓</div>
                     <h4 class="cert-title">Windchill: Fundamentals of Creating and Managing Work</h4>
                     <p class="cert-issuer">PTC University</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/PTC_%28software_company%29_logo.svg/320px-PTC_%28software_company%29_logo.svg.png" alt="PTC Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1mkZx0fRWre8BIJI3G2pAyUMGDjK75_ML/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1932,6 +2485,7 @@
                     <div class="cert-icon">☕</div>
                     <h4 class="cert-title">Core Java Programming</h4>
                     <p class="cert-issuer">Seed Infotech</p>
+                    <img src="https://www.seedinfotech.com/assets/images/seed-logo.png" alt="Seed Infotech Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1wbzreUQtqoC-3uOhS_xPWuSgAEbEBxPd/view?usp=sharing" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1946,6 +2500,7 @@
                     <div class="cert-icon">☕</div>
                     <h4 class="cert-title">Advanced Java Programming</h4>
                     <p class="cert-issuer">Seed Infotech</p>
+                    <img src="https://www.seedinfotech.com/assets/images/seed-logo.png" alt="Seed Infotech Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/152cpuKOggaExjXZ9phRCxfjmwSqY2uvs/view?usp=sharing" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1960,6 +2515,7 @@
                     <div class="cert-icon">💾</div>
                     <h4 class="cert-title">Complete SQL Bootcamp</h4>
                     <p class="cert-issuer">Udemy</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Udemy_logo.svg/320px-Udemy_logo.svg.png" alt="Udemy Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1IOEx0_srREZ2qceBgzPNnsitd1nmG80i/view?usp=sharing" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1974,6 +2530,7 @@
                     <div class="cert-icon">🌐</div>
                     <h4 class="cert-title">Web Development Bootcamp</h4>
                     <p class="cert-issuer">Udemy</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Udemy_logo.svg/320px-Udemy_logo.svg.png" alt="Udemy Logo" class="cert-provider-logo">
                     <a href="https://www.udemy.com/certificate/UC-273bfedb-e0ba-4f41-8fa0-ec62eaecdcf9/" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1988,6 +2545,7 @@
                     <div class="cert-icon">📊</div>
                     <h4 class="cert-title">Big Data</h4>
                     <p class="cert-issuer">TCS Ascend</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Tata_Consultancy_Services_Logo.svg" alt="TCS Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1Rl18NFBb6D_LgBhaTlZEjHpjVZ848BgY/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2002,6 +2560,7 @@
                     <div class="cert-icon">🏢</div>
                     <h4 class="cert-title">Data Warehouse Fundamentals</h4>
                     <p class="cert-issuer">TCS Ascend</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Tata_Consultancy_Services_Logo.svg" alt="TCS Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1P4QqzX92OlDWzJfiVeWIq0zjEfSczpXT/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2022,6 +2581,18 @@
                 <div class="section-number">[ 07 ]</div>
                 <h2 class="section-title">Get In Touch</h2>
             </div>
+            <div class="contact-grid">
+                <a href="mailto:varadselukar2000@gmail.com" class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">varadselukar2000@gmail.com</div>
+                </a>
+
+                <a href="tel:+917769935508" class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value">+91 7769935508</div>
+                </a>
 
                 <a href="https://github.com/Varad879" target="_blank" rel="noopener noreferrer" class="contact-card">
                     <div class="contact-icon">💻</div>
@@ -2073,11 +2644,10 @@
                             <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
                         </svg>
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#1d6b7c6f7c796e787168767c6f2f2d2d2d5d7a707c7471337e7270" class="social-link" aria-label="Email">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
-    </svg>
-</a>
+                    <a href="mailto:varadselukar2000@gmail.com" class="social-link" aria-label="Email">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -2093,7 +2663,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // ===== LOADING SCREEN =====
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -2144,7 +2714,7 @@
         const particles = [];
         // Detect mobile device and HEAVILY optimize for performance
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-        const particleCount = isMobile ? 30 : 150; // Drastically reduced from 80 to 30 on mobile
+        const particleCount = isMobile ? 30 : 300; // Increased desktop from 150 to 300
         
         let mouse = {
             x: null,
@@ -2245,7 +2815,10 @@
             }
 
             draw() {
-                ctx.fillStyle = `rgba(0, 255, 136, ${this.opacity})`;
+                const isLightMode = document.body.classList.contains('light-mode');
+                const particleColor = isLightMode ? '0, 179, 89' : '0, 255, 136';
+                
+                ctx.fillStyle = `rgba(${particleColor}, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -2253,7 +2826,7 @@
                 // Simplified glow on mobile (no glow to save performance)
                 if (!isMobile) {
                     ctx.shadowBlur = 10;
-                    ctx.shadowColor = 'rgba(0, 255, 136, 0.5)';
+                    ctx.shadowColor = `rgba(${particleColor}, 0.5)`;
                     ctx.fill();
                     ctx.shadowBlur = 0;
                 }
@@ -2290,6 +2863,8 @@
             
             particles.forEach((particleA, indexA) => {
                 let connectionCount = 0;
+                const isLightMode = document.body.classList.contains('light-mode');
+                const connectionColor = isLightMode ? '0, 179, 89' : '0, 255, 136';
                 
                 // Only check subset of particles on mobile for performance
                 const checkParticles = isMobile ? particles.slice(indexA + 1, indexA + 6) : particles.slice(indexA + 1);
@@ -2302,7 +2877,7 @@
 
                     if (distance < connectionDistance) {
                         const opacity = (isMobile ? 0.3 : 0.2) * (1 - distance / connectionDistance);
-                        ctx.strokeStyle = `rgba(0, 255, 136, ${opacity})`;
+                        ctx.strokeStyle = `rgba(${connectionColor}, ${opacity})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particleA.x, particleA.y);
@@ -2315,6 +2890,8 @@
 
             // Draw connections from mouse/touch to nearby particles
             if (mouse.x != null && mouse.y != null) {
+                const isLightMode = document.body.classList.contains('light-mode');
+                const cursorColor = isLightMode ? '0, 153, 204' : '0, 217, 255';
                 const mouseConnectionDistance = isMobile ? 100 : 150;
                 let mouseConnections = 0;
                 const maxMouseConnections = isMobile ? 5 : 10; // Limit mouse connections on mobile
@@ -2327,7 +2904,7 @@
 
                     if (distance < mouseConnectionDistance) {
                         const opacity = (isMobile ? 0.5 : 0.3) * (1 - distance / mouseConnectionDistance);
-                        ctx.strokeStyle = `rgba(0, 217, 255, ${opacity})`;
+                        ctx.strokeStyle = `rgba(${cursorColor}, ${opacity})`;
                         ctx.lineWidth = isMobile ? 2 : 1.5;
                         ctx.beginPath();
                         ctx.moveTo(particle.x, particle.y);
@@ -2341,7 +2918,7 @@
                 if (isMobile) {
                     ctx.beginPath();
                     ctx.arc(mouse.x, mouse.y, 6, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(0, 217, 255, 0.4)';
+                    ctx.fillStyle = `rgba(${cursorColor}, 0.4)`;
                     ctx.fill();
                 }
             }
@@ -2491,6 +3068,25 @@
                 }
             });
         });
+
+        // ===== THEME TOGGLE =====
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Save theme preference
+            const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+        });
+
     </script>
 </body>
 </html>
