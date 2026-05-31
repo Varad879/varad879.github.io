@@ -111,6 +111,21 @@
             color: #333333;
         }
 
+        body.light-mode .timeline-title-main,
+        body.light-mode .timeline-label,
+        body.light-mode .timeline-title,
+        body.light-mode .timeline-company,
+        body.light-mode .contact-label,
+        body.light-mode .closing-title,
+        body.light-mode .workflow-title,
+        body.light-mode .footer-text,
+        body.light-mode .skill-category h3,
+        body.light-mode .project-description,
+        body.light-mode .timeline-description,
+        body.light-mode .workflow-desc {
+            color: var(--text-secondary-light);
+        }
+
         body.light-mode .stat-number {
             color: var(--text-primary-light);
         }
@@ -670,7 +685,7 @@
 
         /* Section Headers */
         .section {
-            padding: 4rem 0;
+            padding: 2rem 0;
             position: relative;
             opacity: 0;
             transform: translateY(50px);
@@ -725,8 +740,8 @@
 
         /* Career Timeline Section */
         .career-timeline {
-            margin: 5rem 0;
-            padding: 4rem 0;
+            margin: 2rem 0;
+            padding: 2rem 0;
             position: relative;
         }
 
@@ -876,7 +891,7 @@
         /* Tech Stack Section */
         .tech-stack {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -1460,8 +1475,8 @@
         /* Contact Section */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
             margin-top: 3rem;
         }
 
@@ -1978,6 +1993,466 @@
                 width: 200px;
             }
         }
+
+        /* ===== HAMBURGER BUTTON ===== */
+        .hamburger-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border-color);
+            background: transparent;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        .hamburger-btn span {
+            display: block;
+            width: 16px;
+            height: 1.5px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .hamburger-btn:hover {
+            border-color: var(--text-primary);
+            background: rgba(0, 255, 136, 0.1);
+        }
+        .hamburger-btn.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger-btn.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger-btn.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        body.light-mode .hamburger-btn {
+            border-color: var(--border-color-light);
+        }
+        body.light-mode .hamburger-btn span {
+            background: var(--text-primary-light);
+        }
+        body.light-mode .hamburger-btn:hover {
+            border-color: var(--text-primary-light);
+            background: rgba(0, 179, 89, 0.1);
+        }
+
+        /* ===== BEYOND THE CODE OVERLAY ===== */
+        .btc-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 5000;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .btc-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .btc-overlay-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #050505;
+            z-index: -1;
+        }
+        body.light-mode .btc-overlay-bg {
+            background: #f0f0f0;
+        }
+        .btc-close {
+            position: fixed;
+            top: 2rem; right: 2rem;
+            width: 48px; height: 48px;
+            border: 2px solid rgba(0, 255, 136, 0.4);
+            background: transparent;
+            border-radius: 50%;
+            color: var(--text-primary);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 5100;
+        }
+        .btc-close:hover {
+            background: rgba(0, 255, 136, 0.15);
+            transform: rotate(90deg);
+            border-color: var(--text-primary);
+        }
+        body.light-mode .btc-close {
+            border-color: rgba(0, 179, 89, 0.4);
+            color: var(--text-primary-light);
+        }
+        .btc-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 3rem 4rem;
+        }
+        .btc-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+        }
+        .btc-overlay.open .btc-header {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .btc-label {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+            font-family: 'Space Mono', monospace;
+        }
+        body.light-mode .btc-label { color: var(--text-primary-light); }
+        .btc-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+        body.light-mode .btc-title { color: var(--text-secondary-light); }
+        .btc-title span { color: var(--text-primary); }
+        body.light-mode .btc-title span { color: var(--text-primary-light); }
+        .btc-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Masonry grid */
+        .btc-masonry {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            align-items: start;
+        }
+        .btc-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .btc-photo {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: zoom-in;
+            opacity: 0;
+            transform: translateY(60px) scale(0.96);
+            transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.4s ease;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        body.light-mode .btc-photo {
+            background: rgba(0,0,0,0.04);
+            border-color: rgba(0, 179, 89, 0.15);
+        }
+        .btc-photo.tall   { aspect-ratio: 3/4; }
+        .btc-photo.medium { aspect-ratio: 1/1; }
+        .btc-photo.short  { aspect-ratio: 4/3; }
+
+        .btc-photo.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .btc-photo img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        .btc-photo:hover img { transform: scale(1.07); }
+        .btc-photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 255, 136, 0.08);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        body.light-mode .btc-photo-overlay {
+            background: rgba(0, 179, 89, 0.08);
+        }
+        .btc-photo:hover .btc-photo-overlay { opacity: 1; }
+        .btc-photo-overlay span { font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(0,255,136,0.6)); }
+
+        /* placeholder state */
+        .btc-photo.placeholder {
+            background: rgba(255,255,255,0.02);
+        }
+        body.light-mode .btc-photo.placeholder {
+            background: rgba(0,0,0,0.05);
+        }
+        .btc-photo.placeholder::after {
+            content: 'Photo coming soon';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(0,255,136,0.25);
+            font-size: 0.8rem;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        body.light-mode .btc-photo.placeholder::after {
+            color: rgba(0,179,89,0.3);
+        }
+        .btc-photo.placeholder img { display: none; }
+
+        /* Lightbox */
+        .btc-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 6000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .btc-lightbox.open { opacity: 1; visibility: visible; }
+        .btc-lightbox img {
+            max-width: 90vw; max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .btc-lightbox.open img { transform: scale(1); }
+        .btc-lightbox-close {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            width: 44px; height: 44px;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: transparent;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .btc-lightbox-close:hover { border-color: #fff; transform: rotate(90deg); }
+
+        .btc-footer-text {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            opacity: 0;
+            transition: opacity 0.5s ease 0.8s;
+        }
+        .btc-overlay.open .btc-footer-text { opacity: 1; }
+
+        @media (max-width: 768px) {
+            .btc-masonry { grid-template-columns: repeat(2, 1fr); }
+            .btc-content { padding: 5rem 1.5rem 3rem; }
+            .btc-close { top: 1rem; right: 1rem; }
+        }
+
+
+        /* ===== BTC PARTICLE CANVAS ===== */
+        .btc-particles-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 1s ease 0.3s;
+        }
+        .btc-overlay.open .btc-particles-canvas {
+            opacity: 1;
+        }
+        .btc-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== FLY-IN TITLE ANIMATION ===== */
+        .btc-title {
+            overflow: visible;
+        }
+        .btc-word {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(8px);
+        }
+        .btc-word-1 {
+            transform: translateX(-120px) skewX(-15deg) scale(0.7);
+            transition:
+                opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+                filter 0.7s ease 0.15s;
+            color: var(--text-secondary);
+            text-shadow: 0 0 60px rgba(0,255,136,0.15);
+        }
+        body.light-mode .btc-word-1 { color: var(--text-secondary-light); }
+
+        .btc-word-2 {
+            transform: translateX(120px) skewX(15deg) scale(0.7);
+            transition:
+                opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s,
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s,
+                filter 0.7s ease 0.35s;
+            color: var(--text-primary);
+            text-shadow: 0 0 40px rgba(0,255,136,0.4), 0 0 80px rgba(0,255,136,0.15);
+        }
+        body.light-mode .btc-word-2 { color: var(--text-primary-light); text-shadow: 0 0 40px rgba(0,179,89,0.4); }
+
+        .btc-overlay.open .btc-word-1,
+        .btc-overlay.open .btc-word-2 {
+            opacity: 1;
+            transform: translateX(0) skewX(0deg) scale(1);
+            filter: blur(0px);
+        }
+
+        /* label & subtitle fly-in */
+        .btc-label {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease 0s, transform 0.5s ease 0s;
+            letter-spacing: 0.35em;
+        }
+        .btc-overlay.open .btc-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .btc-subtitle {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.6s ease 0.7s, transform 0.6s ease 0.7s;
+        }
+        .btc-overlay.open .btc-subtitle {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* remove old generic header transition since we handle per-element now */
+        .btc-header {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
+
+        /* ===== HAMBURGER DROPDOWN ===== */
+        .hamburger-wrapper {
+            position: relative;
+        }
+
+        .hamburger-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            border-radius: 6px;
+            backdrop-filter: blur(16px);
+            padding: 0.4rem;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px) scale(0.97);
+            transform-origin: top right;
+            transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+            z-index: 200;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0,255,136,0.05);
+        }
+
+        .hamburger-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 12px;
+            width: 10px;
+            height: 10px;
+            background: rgba(10, 10, 10, 0.95);
+            border-left: 1px solid rgba(0, 255, 136, 0.25);
+            border-top: 1px solid rgba(0, 255, 136, 0.25);
+            transform: rotate(45deg);
+        }
+
+        .hamburger-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .hamburger-menu-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 4px;
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .hamburger-menu-item:hover {
+            background: rgba(0, 255, 136, 0.08);
+            color: var(--text-primary);
+        }
+
+        .hamburger-menu-item:hover .menu-item-icon {
+            transform: scale(1.2);
+        }
+
+        .menu-item-icon {
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .menu-item-text {
+            flex: 1;
+        }
+
+        .hamburger-menu-item svg {
+            opacity: 0.5;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .hamburger-menu-item:hover svg {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        /* Light mode */
+        body.light-mode .hamburger-dropdown {
+            background: rgba(245, 245, 247, 0.97);
+            border-color: rgba(0, 179, 89, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0,179,89,0.05);
+        }
+        body.light-mode .hamburger-dropdown::before {
+            background: rgba(245, 245, 247, 0.97);
+            border-color: rgba(0, 179, 89, 0.3);
+        }
+        body.light-mode .hamburger-menu-item:hover {
+            background: rgba(0, 179, 89, 0.08);
+            color: var(--text-primary-light);
+        }
+
     </style>
 </head>
 <body>
@@ -2041,12 +2516,25 @@
             <li><a href="#tools" data-section="tools">Tools</a></li>
             <li><a href="#experience" data-section="experience">Experience</a></li>
             <li><a href="#projects" data-section="projects">Projects</a></li>
-            <li><a href="#workflow" data-section="workflow">Workflow</a></li>
             <li><a href="#skills" data-section="skills">Skills</a></li>
             <li><a href="#certifications" data-section="certifications">Certifications</a></li>
             <li><a href="#contact" data-section="contact">Contact</a></li>
         </ul>
         <div class="nav-actions">
+            <div class="hamburger-wrapper" id="hamburgerWrapper">
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="hamburger-dropdown" id="hamburgerDropdown">
+                    <button class="hamburger-menu-item" id="btcMenuBtn">
+                        <span class="menu-item-icon">📷</span>
+                        <span class="menu-item-text">Beyond the Code</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </div>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="5"></circle>
@@ -2066,6 +2554,29 @@
         </div>
     </nav>
 
+
+    <!-- Beyond the Code Overlay -->
+    <div class="btc-overlay" id="btcOverlay">
+        <div class="btc-overlay-bg"></div>
+        <canvas class="btc-particles-canvas" id="btcParticlesCanvas"></canvas>
+        <button class="btc-close" id="btcClose" aria-label="Close"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <div class="btc-content">
+            <div class="btc-header">
+                <div class="btc-label">[ BEYOND THE CODE ]</div>
+                <h2 class="btc-title">
+                    <span class="btc-word btc-word-1">THROUGH</span><br>
+                    <span class="btc-word btc-word-2 btc-accent">THE LENS</span>
+                </h2>
+                <p class="btc-subtitle">When I'm not migrating data, I'm chasing light.</p>
+            </div>
+            <div class="btc-masonry" id="btcMasonry">
+                <div class="btc-col"><div class="btc-photo tall" data-speed="0.3"><img src="assets/photography/photo1.jpg" alt="Photo 1" onerror="this.parentElement.classList.add('placeholder')"><div class="btc-photo-overlay"><span>&#128247;</span></div></div><div class="btc-photo short" data-speed="0.5"><img src="assets/photography/photo2.jpg" alt="Photo 2" onerror="this.parentElement.classList.add('placeholder')"><div class="btc-photo-overlay"><span>&#128247;</span></div></div><div class="btc-photo medium" data-speed="0.2"><img src="assets/photography/photo3.jpg" alt="Photo 3" onerror="this.parentElement.classList.add('placeholder')"><div class="btc-photo-overlay"><span>&#128247;</span></div></div></div>
+                <div class="btc-col"><div class="btc-photo short" data-speed="0.6"><img src="assets/photography/photo4.jpg" alt="Photo 4" onerror="this.parentElement.classList.add('placeholder')"><div class="btc-photo-overlay"><span>&#128247;</span></div></div><div class="btc-photo tall" data-speed="0.4"><img src="assets/photography/photo5.jpg" alt="Photo 5" onerror="this.parentElement.classList.add('placeholder')"><div class="btc-photo-overlay"><span>&#128247;</span></div></div><div class="btc-photo short" data-speed="0.3"><img src="assets/photography/photo6.jpg" alt="Photo 6" onerror="this.parentElement.classList.add('placeholder')"><div class="btc-photo-overlay"><span>&#128247;</span></div></div></div>
+                <div class="btc-col"><div class="btc-photo medium" data-speed="0.5"><img src="assets/photography/photo7.jpg" alt="Photo 7" onerror="this.parentElement.classList.add('placeholder')"><div class="btc-photo-overlay"><span>&#128247;</span></div></div><div class="btc-photo tall" data-speed="0.2"><img src="assets/photography/photo8.jpg" alt="Photo 8" onerror="this.parentElement.classList.add('placeholder')"><div class="btc-photo-overlay"><span>&#128247;</span></div></div><div class="btc-photo short" data-speed="0.6"><img src="assets/photography/photo9.jpg" alt="Photo 9" onerror="this.parentElement.classList.add('placeholder')"><div class="btc-photo-overlay"><span>&#128247;</span></div></div></div>
+            </div>
+            <div class="btc-footer-text">All images &copy; Varad Selukar</div>
+        </div>
+    </div>
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
@@ -2294,43 +2805,6 @@
             </div>
         </section>
 
-        <!-- Workflow Section -->
-        <section id="workflow" class="section">
-            <div class="section-header">
-                <div class="section-number">[ 04 ]</div>
-                <h2 class="section-title">Migration Workflow</h2>
-            </div>
-            <div class="workflow-container">
-                <div class="workflow-steps">
-                    <div class="workflow-step">
-                        <div class="workflow-number">01</div>
-                        <h4 class="workflow-title">Data Extraction</h4>
-                        <p class="workflow-desc">Extract data from legacy systems and validate source integrity</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-number">02</div>
-                        <h4 class="workflow-title">Transformation</h4>
-                        <p class="workflow-desc">Apply PL/SQL procedures to transform and normalize data structures</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-number">03</div>
-                        <h4 class="workflow-title">Validation</h4>
-                        <p class="workflow-desc">Verify data accuracy, version control, and metadata consistency</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-number">04</div>
-                        <h4 class="workflow-title">WBM Loading</h4>
-                        <p class="workflow-desc">Use Windchill Bulk Migrator for structured integration into Windchill</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-number">05</div>
-                        <h4 class="workflow-title">Reconciliation</h4>
-                        <p class="workflow-desc">Post-load verification and quality assurance checks</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Skills Section -->
         <section id="skills" class="section">
             <div class="section-header">
@@ -2407,9 +2881,8 @@
                 <h2 class="section-title">Certifications</h2>
             </div>
             <div class="certifications-grid">
-
                 <div class="cert-card">
-                    <div class="cert-icon">🎓</div>
+                    <div class="cert-icon">💾</div>
                     <h4 class="cert-title">Windchill+  Overview</h4>
                     <p class="cert-issuer">PTC Field Academy</p>
                     <a href="https://drive.google.com/file/d/117GCWvtrSimf2_Y3JljY8mztSTJWeI6u/view?usp=drive_link" class="cert-link" target="_blank" rel="noopener noreferrer">
@@ -2423,7 +2896,7 @@
                 </div>
 
                 <div class="cert-card">
-                    <div class="cert-icon">🎓</div>
+                    <div class="cert-icon">💾</div>
                     <h4 class="cert-title">Windchill+ Data Migration</h4>
                     <p class="cert-issuer">PTC Field Academy</p>
                     <a href="https://drive.google.com/file/d/11998yJnR6bmEpxt9FiuKCpBe_yMKful5/view?usp=drive_link" class="cert-link" target="_blank" rel="noopener noreferrer">
@@ -2437,10 +2910,9 @@
                 </div>
 
                 <div class="cert-card">
-                    <div class="cert-icon">🎓</div>
+                    <div class="cert-icon">💾</div>
                     <h4 class="cert-title">Windchill: Fundamentals Overview</h4>
                     <p class="cert-issuer">PTC University</p>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/PTC_%28software_company%29_logo.svg/320px-PTC_%28software_company%29_logo.svg.png" alt="PTC Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1eZsrCZz_EmBtFV9AOdzfS7rbZr1jgfpt/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2452,10 +2924,9 @@
                 </div>
 
                 <div class="cert-card">
-                    <div class="cert-icon">🎓</div>
+                    <div class="cert-icon">💾</div>
                     <h4 class="cert-title">Windchill: Fundamentals of Change Management</h4>
                     <p class="cert-issuer">PTC University</p>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/PTC_%28software_company%29_logo.svg/320px-PTC_%28software_company%29_logo.svg.png" alt="PTC Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1nU_CJDaFXzOrySYlWf7HpSBcwNglNmD9/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2467,10 +2938,9 @@
                 </div>
 
                 <div class="cert-card">
-                    <div class="cert-icon">🎓</div>
+                    <div class="cert-icon">💾</div>
                     <h4 class="cert-title">Windchill: Fundamentals of Creating and Managing Work</h4>
                     <p class="cert-issuer">PTC University</p>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/PTC_%28software_company%29_logo.svg/320px-PTC_%28software_company%29_logo.svg.png" alt="PTC Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1mkZx0fRWre8BIJI3G2pAyUMGDjK75_ML/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2485,7 +2955,6 @@
                     <div class="cert-icon">☕</div>
                     <h4 class="cert-title">Core Java Programming</h4>
                     <p class="cert-issuer">Seed Infotech</p>
-                    <img src="https://www.seedinfotech.com/assets/images/seed-logo.png" alt="Seed Infotech Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1wbzreUQtqoC-3uOhS_xPWuSgAEbEBxPd/view?usp=sharing" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2500,7 +2969,6 @@
                     <div class="cert-icon">☕</div>
                     <h4 class="cert-title">Advanced Java Programming</h4>
                     <p class="cert-issuer">Seed Infotech</p>
-                    <img src="https://www.seedinfotech.com/assets/images/seed-logo.png" alt="Seed Infotech Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/152cpuKOggaExjXZ9phRCxfjmwSqY2uvs/view?usp=sharing" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2512,10 +2980,9 @@
                 </div>
 
                 <div class="cert-card">
-                    <div class="cert-icon">💾</div>
+                    <div class="cert-icon">🗄️</div>
                     <h4 class="cert-title">Complete SQL Bootcamp</h4>
                     <p class="cert-issuer">Udemy</p>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Udemy_logo.svg/320px-Udemy_logo.svg.png" alt="Udemy Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1IOEx0_srREZ2qceBgzPNnsitd1nmG80i/view?usp=sharing" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2530,7 +2997,6 @@
                     <div class="cert-icon">🌐</div>
                     <h4 class="cert-title">Web Development Bootcamp</h4>
                     <p class="cert-issuer">Udemy</p>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Udemy_logo.svg/320px-Udemy_logo.svg.png" alt="Udemy Logo" class="cert-provider-logo">
                     <a href="https://www.udemy.com/certificate/UC-273bfedb-e0ba-4f41-8fa0-ec62eaecdcf9/" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2545,7 +3011,6 @@
                     <div class="cert-icon">📊</div>
                     <h4 class="cert-title">Big Data</h4>
                     <p class="cert-issuer">TCS Ascend</p>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Tata_Consultancy_Services_Logo.svg" alt="TCS Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1Rl18NFBb6D_LgBhaTlZEjHpjVZ848BgY/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2560,7 +3025,6 @@
                     <div class="cert-icon">🏢</div>
                     <h4 class="cert-title">Data Warehouse Fundamentals</h4>
                     <p class="cert-issuer">TCS Ascend</p>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Tata_Consultancy_Services_Logo.svg" alt="TCS Logo" class="cert-provider-logo">
                     <a href="https://drive.google.com/file/d/1P4QqzX92OlDWzJfiVeWIq0zjEfSczpXT/view" class="cert-link" target="_blank" rel="noopener noreferrer">
                         <span>View Certificate</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2714,7 +3178,7 @@
         const particles = [];
         // Detect mobile device and HEAVILY optimize for performance
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-        const particleCount = isMobile ? 30 : 300; // Increased desktop from 150 to 300
+        const particleCount = isMobile ? 30 : 250;
         
         let mouse = {
             x: null,
@@ -2816,7 +3280,7 @@
 
             draw() {
                 const isLightMode = document.body.classList.contains('light-mode');
-                const particleColor = isLightMode ? '0, 179, 89' : '0, 255, 136';
+                const particleColor = isLightMode ? '20, 20, 20' : '0, 255, 136';
                 
                 ctx.fillStyle = `rgba(${particleColor}, ${this.opacity})`;
                 ctx.beginPath();
@@ -2864,7 +3328,7 @@
             particles.forEach((particleA, indexA) => {
                 let connectionCount = 0;
                 const isLightMode = document.body.classList.contains('light-mode');
-                const connectionColor = isLightMode ? '0, 179, 89' : '0, 255, 136';
+                const connectionColor = isLightMode ? '20, 20, 20' : '0, 255, 136';
                 
                 // Only check subset of particles on mobile for performance
                 const checkParticles = isMobile ? particles.slice(indexA + 1, indexA + 6) : particles.slice(indexA + 1);
@@ -2891,7 +3355,7 @@
             // Draw connections from mouse/touch to nearby particles
             if (mouse.x != null && mouse.y != null) {
                 const isLightMode = document.body.classList.contains('light-mode');
-                const cursorColor = isLightMode ? '0, 153, 204' : '0, 217, 255';
+                const cursorColor = isLightMode ? '20, 20, 20' : '0, 217, 255';
                 const mouseConnectionDistance = isMobile ? 100 : 150;
                 let mouseConnections = 0;
                 const maxMouseConnections = isMobile ? 5 : 10; // Limit mouse connections on mobile
@@ -2932,7 +3396,7 @@
             canvas.height = window.innerHeight;
             // Reinitialize particles on resize
             particles.length = 0;
-            const newCount = window.innerWidth < 768 ? 30 : 150;
+            const newCount = window.innerWidth < 768 ? 30 : 250;
             for (let i = 0; i < newCount; i++) {
                 particles.push(new Particle());
             }
@@ -3085,6 +3549,190 @@
             // Save theme preference
             const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
             localStorage.setItem('theme', theme);
+        });
+
+
+        // ===== BEYOND THE CODE =====
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const btcOverlay = document.getElementById('btcOverlay');
+        const btcClose = document.getElementById('btcClose');
+        const btcPhotos = document.querySelectorAll('.btc-photo');
+
+        // Lightbox setup
+        const lightbox = document.createElement('div');
+        lightbox.className = 'btc-lightbox';
+        lightbox.innerHTML = '<img id="btcLightboxImg" src="" alt=""><button class="btc-lightbox-close">✕</button>';
+        document.body.appendChild(lightbox);
+        const lbImg = document.getElementById('btcLightboxImg');
+        lightbox.querySelector('.btc-lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
+
+        // ===== BTC PARTICLE SYSTEM =====
+        (function() {
+            const canvas = document.getElementById('btcParticlesCanvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let animId = null;
+            let active = false;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            class BtcParticle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.4;
+                    this.vy = (Math.random() - 0.5) * 0.4;
+                    this.radius = Math.random() * 1.8 + 0.4;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    this.pulse = Math.random() * Math.PI * 2;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.pulse += 0.02;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+                draw() {
+                    const isLight = document.body.classList.contains('light-mode');
+                    const col = isLight ? '20,20,20' : '0,255,136';
+                    const op = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${col},${op})`;
+                    ctx.fill();
+                }
+            }
+
+            function initBtcParticles() {
+                particles = [];
+                const count = window.innerWidth < 768 ? 40 : 120;
+                for (let i = 0; i < count; i++) particles.push(new BtcParticle());
+            }
+
+            function drawConnections() {
+                const isLight = document.body.classList.contains('light-mode');
+                const col = isLight ? '20,20,20' : '0,255,136';
+                const dist = 110;
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const d = Math.sqrt(dx*dx + dy*dy);
+                        if (d < dist) {
+                            ctx.strokeStyle = `rgba(${col},${0.12 * (1 - d/dist)})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animateBtc() {
+                if (!active) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawConnections();
+                particles.forEach(p => { p.update(); p.draw(); });
+                animId = requestAnimationFrame(animateBtc);
+            }
+
+            window.startBtcParticles = function() {
+                active = true;
+                initBtcParticles();
+                animateBtc();
+            };
+            window.stopBtcParticles = function() {
+                active = false;
+                if (animId) cancelAnimationFrame(animId);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            };
+        })();
+
+        function openBTC() {
+            btcOverlay.classList.add('open');
+            hamburgerBtn.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // stagger photo reveal
+            btcPhotos.forEach((photo, i) => {
+                setTimeout(() => photo.classList.add('in-view'), 150 + i * 80);
+            });
+            if (window.startBtcParticles) window.startBtcParticles();
+        }
+
+        function closeBTC() {
+            btcOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+            btcPhotos.forEach(p => p.classList.remove('in-view'));
+            if (window.stopBtcParticles) window.stopBtcParticles();
+        }
+
+        const hamburgerWrapper = document.getElementById('hamburgerWrapper');
+        const hamburgerDropdown = document.getElementById('hamburgerDropdown');
+        const btcMenuBtn = document.getElementById('btcMenuBtn');
+
+        function openDropdown() {
+            hamburgerDropdown.classList.add('open');
+            hamburgerBtn.classList.add('active');
+        }
+        function closeDropdown() {
+            hamburgerDropdown.classList.remove('open');
+            hamburgerBtn.classList.remove('active');
+        }
+
+        hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            hamburgerDropdown.classList.contains('open') ? closeDropdown() : openDropdown();
+        });
+
+        btcMenuBtn.addEventListener('click', () => {
+            closeDropdown();
+            openBTC();
+        });
+
+        // Close dropdown on outside click
+        document.addEventListener('click', (e) => {
+            if (!hamburgerWrapper.contains(e.target)) closeDropdown();
+        });
+        btcClose.addEventListener('click', closeBTC);
+
+        // Escape key closes
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (lightbox.classList.contains('open')) lightbox.classList.remove('open');
+                else if (btcOverlay.classList.contains('open')) closeBTC();
+            }
+        });
+
+        // Parallax on scroll inside overlay
+        btcOverlay.addEventListener('scroll', () => {
+            const scrollY = btcOverlay.scrollTop;
+            document.querySelectorAll('.btc-col').forEach((col, i) => {
+                const speed = [0.04, -0.06, 0.03][i] || 0;
+                col.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        });
+
+        // Lightbox on click (skip placeholders)
+        btcPhotos.forEach(photo => {
+            photo.addEventListener('click', () => {
+                if (photo.classList.contains('placeholder')) return;
+                const img = photo.querySelector('img');
+                if (img) {
+                    lbImg.src = img.src;
+                    lightbox.classList.add('open');
+                }
+            });
         });
 
     </script>
